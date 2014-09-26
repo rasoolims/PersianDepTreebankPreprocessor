@@ -1,15 +1,9 @@
 import os,sys,codecs
 from collections import defaultdict
 
-def main():
-	if len(sys.argv)<2:
-		print 'python merge_disjoint_words.py [input_conll_file] [output_conll_file]'
-		print '>> This script converts the conll file such that disjoint words are merged'
-		print '>> Disjoint words are attachment=NXT and attachment=PRV'
-		sys.exit(0)
-
-	sens=codecs.open(os.path.abspath(sys.argv[1]),'r').read().split('\n\n')
-	writer=codecs.open(os.path.abspath(sys.argv[2]),'w')
+def main(input_conll_file,output_conll_file):
+	sens=codecs.open(input_conll_file,'r').read().split('\n\n')
+	writer=codecs.open(output_conll_file,'w')
 
 	for sen in sens:
 		sen=sen.strip()
@@ -94,4 +88,9 @@ def main():
 
 
 if __name__ == '__main__':
-	main()
+	if len(sys.argv)<2:
+		print 'python merge_disjoint_words.py [input_conll_file] [output_conll_file]'
+		print '>> This script converts the conll file such that disjoint words are merged'
+		print '>> Disjoint words are attachment=NXT and attachment=PRV'
+		sys.exit(0)
+	main(os.path.abspath(sys.argv[1]),os.path.abspath(sys.argv[2]))
