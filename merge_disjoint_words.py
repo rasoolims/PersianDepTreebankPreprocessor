@@ -77,9 +77,10 @@ def main(input_conll_file,output_conll_file):
 					if combined_head==new_head1:
 						combined_head=new_head2
 					else:
-						combined_head=new_head2
+						combined_head=new_head1
 
-
+				if combined_head==i:
+					print i,new_head1,new_head2
 				cpnd=str(i)+'\t'+combined_word+'\t'+combined_lemma+'\t'+combined_pos+'\t'+\
 				combined_fpos+'\t'+combined_feat+'\t'+str(combined_head)+'\t'+combined_label+'\t_\t_'
 				final_output.append(cpnd)
