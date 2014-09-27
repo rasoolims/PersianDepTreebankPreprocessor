@@ -62,17 +62,23 @@ def main(input_conll_file,output_conll_file):
 				combined_feat=feat1+'|'+feat2
 				combined_head=new_head1
 				
-				if (pos2=='N' and pos1!='V') or pos2=='V' or pos1=='POSTP':
+				if (pos2=='N' and pos1!='V') or pos2=='V' or pos1=='POSTP'  or pos2=='POSTP':
 					combined_pos=pos2
 					combined_fpos=fpos2
 					combined_head=new_head2
 					combined_label=label2
-				
+					
 				if pos1=='PR' and (pos2=='SUBR' or pos2=='CONJ'):
 					combined_pos=pos2
 					combined_head=new_head2
 					combined_fpos=fpos2
 					combined_label=label2
+				if combined_head==i:
+					if combined_head==new_head1:
+						combined_head=new_head2
+					else:
+						combined_head=new_head2
+
 
 				cpnd=str(i)+'\t'+combined_word+'\t'+combined_lemma+'\t'+combined_pos+'\t'+\
 				combined_fpos+'\t'+combined_feat+'\t'+str(combined_head)+'\t'+combined_label+'\t_\t_'
