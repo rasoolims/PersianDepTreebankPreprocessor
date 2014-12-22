@@ -1,3 +1,4 @@
+# -*- coding: utf8
 import os,sys,codecs
 from collections import defaultdict
 
@@ -54,6 +55,7 @@ def main(input_conll_file,output_conll_file):
 				lemma2=flds2[2]
 				label2=flds2[7]
 
+				combined_word=u''
 				combined_word=word1+word2
 				combined_pos=pos1
 				combined_fpos=fpos1
@@ -61,6 +63,8 @@ def main(input_conll_file,output_conll_file):
 				combined_lemma=lemma1+'|'+lemma2
 				combined_feat=feat1+'|'+feat2
 				combined_head=new_head1
+
+
 				
 				if (pos2=='N' and pos1!='V') or pos2=='V' or pos1=='POSTP'  or pos2=='POSTP':
 					combined_pos=pos2
@@ -79,6 +83,11 @@ def main(input_conll_file,output_conll_file):
 					else:
 						combined_head=new_head1
 
+
+				#if combined_word.decode('utf-8')==u'مرا' and combined_label=='ACC-CASE':
+					#combined_label=label2
+					#combined_head=new_head2
+
 				if combined_head==i:
 					print i,new_head1,new_head2
 				cpnd=str(i)+'\t'+combined_word+'\t'+combined_lemma+'\t'+combined_pos+'\t'+\
@@ -87,7 +96,14 @@ def main(input_conll_file,output_conll_file):
 			else:
 				print new_flds[i]
 				sys.exit(1)
-		writer.write('\n'.join(final_output)+'\n\n')
+
+		final_output2=list()
+		for x in range(0,len(final_output)):
+			spl=final_output[x].split('\t')
+			if spl[1].decode('utf-8')==u'مرا' and spl[7]=='ACC-CASE':
+				spl[7]='OBJ'
+			final_output2.append('\t'.join(spl))
+		writer.write('\n'.join(final_output2)+'\n\n')
 	writer.flush()
 	writer.close()
 

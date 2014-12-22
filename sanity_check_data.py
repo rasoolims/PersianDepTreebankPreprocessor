@@ -43,8 +43,8 @@ def has_loop(sens):
 		#print rev_head
 		if trav(rev_head,0,visited):
 			print sen
-		#if len(visited)<len(ls):
-			#print sen
+		if len(visited)<len(ls):
+			print sen
 
 
 	sys.stdout.write('\n')
