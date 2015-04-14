@@ -1,6 +1,5 @@
 import os,sys,codecs
 
-
 sens=codecs.open(os.path.abspath(sys.argv[1]),'r').read().split('\n\n')
 
 ln=len(sens)

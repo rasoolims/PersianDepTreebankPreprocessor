@@ -17,7 +17,7 @@ def has_rep(train_sens,dev_sens,test_sens,train_writer,dev_writer,test_writer):
 
 		sentence=' '.join(ws)
 		if sen_dic.has_key(sentence):
-			print 'train'
+			print sentence
 			rep+=1
 			#return True
 		else:
@@ -36,7 +36,7 @@ def has_rep(train_sens,dev_sens,test_sens,train_writer,dev_writer,test_writer):
 
 		sentence=' '.join(ws)
 		if sen_dic.has_key(sentence):
-			print 'dev'
+			print sentence
 			rep+=1
 			#return True
 		else:
@@ -55,7 +55,7 @@ def has_rep(train_sens,dev_sens,test_sens,train_writer,dev_writer,test_writer):
 
 		sentence=' '.join(ws)
 		if sen_dic.has_key(sentence):
-			print 'test'
+			print sentence
 			rep+=1
 			#return True
 		else:

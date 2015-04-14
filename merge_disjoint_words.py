@@ -3,8 +3,8 @@ import os,sys,codecs
 from collections import defaultdict
 
 def main(input_conll_file,output_conll_file):
-	sens=codecs.open(input_conll_file,'r').read().split('\n\n')
-	writer=codecs.open(output_conll_file,'w')
+	sens=codecs.open(input_conll_file,'r',encoding='utf-8').read().split('\n\n')
+	writer=codecs.open(output_conll_file,'w',encoding='utf-8')
 
 	for sen in sens:
 		sen=sen.strip()
@@ -57,6 +57,10 @@ def main(input_conll_file,output_conll_file):
 
 				combined_word=u''
 				combined_word=word1+word2
+				if (word2.startswith(u'ا') or word2.startswith(u'آ')) and len(word2.strip())>1 and \
+				not (word1.endswith(u'د') or word1.endswith(u'ذ') or word1.endswith(u'ر') or word1.endswith(u'ز') or word1.endswith(u'ا') or word1.endswith(u'آ')): 
+					combined_word=word1+u'‌'+word2
+					print combined_word
 				combined_pos=pos1
 				combined_fpos=fpos1
 				combined_label=label1
@@ -84,7 +88,7 @@ def main(input_conll_file,output_conll_file):
 						combined_head=new_head1
 
 
-				#if combined_word.decode('utf-8')==u'مرا' and combined_label=='ACC-CASE':
+				#if combined_word==u'مرا' and combined_label=='ACC-CASE':
 					#combined_label=label2
 					#combined_head=new_head2
 
@@ -100,7 +104,7 @@ def main(input_conll_file,output_conll_file):
 		final_output2=list()
 		for x in range(0,len(final_output)):
 			spl=final_output[x].split('\t')
-			if spl[1].decode('utf-8')==u'مرا' and spl[7]=='ACC-CASE':
+			if spl[1]==u'مرا' and spl[7]=='ACC-CASE':
 				spl[7]='OBJ'
 			final_output2.append('\t'.join(spl))
 		writer.write('\n'.join(final_output2)+'\n\n')
